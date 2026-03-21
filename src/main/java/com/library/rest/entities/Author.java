@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,12 +17,12 @@ import java.util.UUID;
 @Entity
 @Table(name = "authors")
 public class Author {
-    @Id @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-    @Column(nullable = false, length = 100)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String fullName;
     private LocalDate birthDay;
     @Enumerated(EnumType.STRING)
-    @Column(name = "literary_movement")
     private LiteraryMovement literaryMovement;
+    @OneToMany(mappedBy = "author")
+    private List<Book> books;
 }

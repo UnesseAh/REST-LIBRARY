@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,13 +14,15 @@ import java.util.UUID;
 @Entity
 @Table(name = "books")
 public class Book {
-    @Id @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String isbn;
     private String title;
     private Integer publishedYear;
     @Enumerated(EnumType.STRING)
-    @Column(name = "book_genre")
     private BookGenre bookGenre;
     private String coverImageUrl;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private Author author;
 }
