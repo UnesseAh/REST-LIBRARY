@@ -17,11 +17,15 @@ import java.util.List;
 @Entity
 @Table(name = "authors")
 public class Author {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "full_name")
     private String fullName;
+    @Column(name = "birth_day")
     private LocalDate birthDay;
     @Enumerated(EnumType.STRING)
+    @Column(name = "literary_movement")
     private LiteraryMovement literaryMovement;
     @OneToMany(mappedBy = "author")
     private List<Book> books;
