@@ -2,4 +2,19 @@ $kind: http-request
 name: createBook
 url: "{{URL}}/books"
 method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"isbn\": \"\",\r
+
+    \  \"title\": \"\",\r
+
+    \  \"publishedYear\": 0,\r
+
+    \  \"bookGenre\": \"FICTION\",\r
+
+    \  \"coverImageUrl\": \"\"\r
+
+    }"
 order: 1019956522636298

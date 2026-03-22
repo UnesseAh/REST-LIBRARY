@@ -2,4 +2,7 @@ $kind: http-request
 name: patchBook
 url: "{{URL}}/books/1"
 method: PATCH
-order: 4489824080570956
+body:
+  type: json
+  content: "{\r\n  \"coverImageUrl\": \"\"\r\n}"
+order: 3700484110505692

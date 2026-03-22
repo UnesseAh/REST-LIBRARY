@@ -1,5 +1,5 @@
 $kind: http-request
 name: deleteAuthor
-url: "{{URL}}/authors/1"
+url: "{{URL}}/authors/2"
 method: DELETE
 order: 4493286371294564

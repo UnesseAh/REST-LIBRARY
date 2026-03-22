@@ -1,5 +1,6 @@
 package com.library.rest.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.library.rest.entities.enums.LiteraryMovement;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,5 +29,6 @@ public class Author {
     @Column(name = "literary_movement")
     private LiteraryMovement literaryMovement;
     @OneToMany(mappedBy = "author")
+    @JsonIgnore
     private List<Book> books;
 }

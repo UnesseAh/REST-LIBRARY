@@ -2,4 +2,15 @@ $kind: http-request
 name: createAuthor
 url: "{{URL}}/authors"
 method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"fullName\": \"author-2\",\r
+
+    \  \"birthDay\": \"1998-01-01\",\r
+
+    \  \"literaryMovement\": \"EXISTENTIALISM\"\r
+
+    }"
 order: 2076194342226880

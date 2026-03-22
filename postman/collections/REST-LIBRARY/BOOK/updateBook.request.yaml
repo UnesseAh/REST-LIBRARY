@@ -2,4 +2,19 @@ $kind: http-request
 name: updateBook
 url: "{{URL}}/books/1"
 method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"isbn\": \"\",\r
+
+    \  \"title\": \"\",\r
+
+    \  \"publishedYear\": 0,\r
+
+    \  \"bookGenre\": \"FICTION\",\r
+
+    \  \"coverImageUrl\": \"\"\r
+
+    }"
 order: 3530862112528109
