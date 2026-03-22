@@ -34,16 +34,27 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author updateAuthor(Long id, Author author) {
-        return null;
+        return authorRepository.findById(id)
+                .map(existingAuthor -> {
+                    existingAuthor.setFullName(author.getFullName());
+                    existingAuthor.setBirthDay(author.getBirthDay());
+                    existingAuthor.setLiteraryMovement(author.getLiteraryMovement());
+                    return authorRepository.save(existingAuthor);
+                })
+                .orElseThrow(() -> new RuntimeException("Author not found with id : " + id));
     }
 
     @Override
     public void deleteAuthor(Long id) {
-        authorRepository.deleteById(id);
+        if (authorRepository.existsById(id)){
+            authorRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Cannot delete: Author not found with id : " + id);
+        }
     }
 
     @Override
-    public List<Author> findByMovement(LiteraryMovement movement) {
-        return List.of();
+    public List<Author> findByLiteraryMovement(LiteraryMovement movement) {
+        return authorRepository.findByLiteraryMovement(movement);
     }
 }

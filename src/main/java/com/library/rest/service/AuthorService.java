@@ -12,5 +12,5 @@ public interface AuthorService {
     Author createAuthor(Author author);
     Author updateAuthor(Long id, Author author);
     void deleteAuthor(Long id);
-    List<Author> findByMovement(LiteraryMovement movement);
+    List<Author> findByLiteraryMovement(LiteraryMovement movement);
 }
