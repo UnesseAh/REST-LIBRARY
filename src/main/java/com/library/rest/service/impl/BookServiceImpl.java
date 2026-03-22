@@ -18,17 +18,17 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getAllBooks() {
-        return List.of();
+        return bookRepository.findAll();
     }
 
     @Override
     public Optional<Book> getBookById(Long id) {
-        return Optional.empty();
+        return bookRepository.findById(id);
     }
 
     @Override
     public Book createBook(Book book) {
-        return null;
+        return bookRepository.save(book);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteBook(Long id) {
-
+        bookRepository.deleteById(id);
     }
 }

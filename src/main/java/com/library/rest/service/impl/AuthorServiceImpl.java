@@ -19,17 +19,17 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public List<Author> getAllAuthors() {
-        return List.of();
+        return authorRepository.findAll();
     }
 
     @Override
     public Optional<Author> getAuthorById(Long id) {
-        return Optional.empty();
+        return authorRepository.findById(id);
     }
 
     @Override
     public Author createAuthor(Author author) {
-        return null;
+        return authorRepository.save(author);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void deleteAuthor(Long id) {
-
+        authorRepository.deleteById(id);
     }
 
     @Override
