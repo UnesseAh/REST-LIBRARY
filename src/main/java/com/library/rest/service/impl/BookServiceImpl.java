@@ -10,7 +10,11 @@ import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
+    private final BookRepository bookRepository;
 
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     @Override
     public List<Book> getAllBooks() {
