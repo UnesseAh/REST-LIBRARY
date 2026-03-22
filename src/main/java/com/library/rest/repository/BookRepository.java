@@ -1,8 +1,9 @@
 package com.library.rest.repository;
 
+import com.library.rest.entities.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BookRepository extends JpaRepository<BookRepository, Long> {
+public interface BookRepository extends JpaRepository<Book, Long> {
 }
