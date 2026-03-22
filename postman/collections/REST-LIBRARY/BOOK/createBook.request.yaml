@@ -1,0 +1,5 @@
+$kind: http-request
+name: createBook
+url: "{{URL}}/books"
+method: POST
+order: 1019956522636298

@@ -1,0 +1,5 @@
+$kind: http-request
+name: updateAuthor
+url: "{{URL}}/authors/1"
+method: PUT
+order: 4165443187168026

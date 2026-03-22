@@ -1,0 +1,5 @@
+$kind: http-request
+name: getAllBooks
+url: "{{URL}}/books"
+method: GET
+order: 446693813442

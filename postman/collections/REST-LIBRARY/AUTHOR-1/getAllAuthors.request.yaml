@@ -1,0 +1,5 @@
+$kind: http-request
+name: getAllAuthors
+url: "{{URL}}/authors"
+method: GET
+order: 1774198187570

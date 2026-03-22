@@ -1,0 +1,5 @@
+$kind: http-request
+name: patchBook
+url: "{{URL}}/books/1"
+method: PATCH
+order: 4489824080570956

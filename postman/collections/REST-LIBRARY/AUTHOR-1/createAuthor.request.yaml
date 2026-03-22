@@ -1,0 +1,5 @@
+$kind: http-request
+name: createAuthor
+url: "{{URL}}/authors"
+method: POST
+order: 2076194342226880

@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
+
     private final BookRepository bookRepository;
     private final AuthorService authorService;
 
@@ -54,7 +55,7 @@ public class BookServiceImpl implements BookService {
                     }
                     return bookRepository.save(existingBook);
                 })
-                .orElseThrow(() -> new RuntimeException("Book not found with id : " + id ));
+                .orElseThrow(() -> new RuntimeException("Book not found with id : " + id));
     }
 
     @Override

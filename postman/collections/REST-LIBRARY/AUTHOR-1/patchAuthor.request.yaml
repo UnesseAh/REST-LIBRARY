@@ -1,0 +1,5 @@
+$kind: http-request
+name: patchAuthor
+url: "{{URL}}/authors/1"
+method: PATCH
+order: 4458083982953255

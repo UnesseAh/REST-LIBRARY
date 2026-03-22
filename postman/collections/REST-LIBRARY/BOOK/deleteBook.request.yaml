@@ -1,0 +1,5 @@
+$kind: http-request
+name: deleteBook
+url: "{{URL}}/books"
+method: DELETE
+order: 4476052014815586
