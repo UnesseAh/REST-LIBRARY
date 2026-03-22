@@ -17,10 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "authors")
-public class Author {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Author extends BaseEntity {
     @Column(name = "full_name")
     private String fullName;
     @Column(name = "birth_day")
@@ -29,6 +26,5 @@ public class Author {
     @Column(name = "literary_movement")
     private LiteraryMovement literaryMovement;
     @OneToMany(mappedBy = "author")
-    @JsonIgnore
     private List<Book> books;
 }

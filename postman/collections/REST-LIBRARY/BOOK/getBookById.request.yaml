@@ -1,5 +1,4 @@
 $kind: http-request
 name: getBookById
-url: "{{URL}}/book/1"
+url: "{{URL}}/books/1"
 method: GET
-order: 1774194398779

@@ -4,5 +4,13 @@ url: "{{URL}}/books/1"
 method: PATCH
 body:
   type: json
-  content: "{\r\n  \"coverImageUrl\": \"\"\r\n}"
+  content: "{\r
+
+    \    \"title\": \"title01\",\r
+
+    \    \"isbn\": \"isbn01\",\r
+
+    \    \"coverImageUrl\": \"img-01\"\r
+
+    }"
 order: 3700484110505692

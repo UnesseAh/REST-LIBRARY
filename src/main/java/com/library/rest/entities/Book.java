@@ -13,10 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "books")
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Book extends BaseEntity{
     @Column(name = "isbn", unique = true, nullable = false)
     private String isbn;
     @Column(name = "title", nullable = false)

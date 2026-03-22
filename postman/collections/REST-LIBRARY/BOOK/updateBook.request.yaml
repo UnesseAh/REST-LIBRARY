@@ -6,15 +6,21 @@ body:
   type: json
   content: "{\r
 
-    \  \"isbn\": \"\",\r
+    \  \"isbn\": \"isbn01\",\r
 
-    \  \"title\": \"\",\r
+    \  \"title\": \"book01\",\r
 
-    \  \"publishedYear\": 0,\r
+    \  \"publishedYear\": \"2000\",\r
 
     \  \"bookGenre\": \"FICTION\",\r
 
-    \  \"coverImageUrl\": \"\"\r
+    \  \"coverImageUrl\": \"\",\r
+
+    \  \"author\": {\r
+
+    \    \"id\": 1\r
+
+    \  }\r
 
     }"
 order: 3530862112528109
