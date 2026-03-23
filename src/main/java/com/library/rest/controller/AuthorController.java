@@ -1,11 +1,11 @@
 package com.library.rest.controller;
 
-import com.library.rest.entities.Author;
+import com.library.rest.dto.author.AuthorRequest;
+import com.library.rest.dto.author.AuthorResponse;
 import com.library.rest.service.AuthorService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/authors")
@@ -17,28 +17,28 @@ public class AuthorController {
     }
 
     @GetMapping
-    public List<Author> getAllAuthors(){
+    public List<AuthorResponse> getAllAuthors(){
         return authorService.getAllAuthors();
     }
 
     @GetMapping("/{id}")
-    public Optional<Author> getAuthorById(@PathVariable Long id){
+    public AuthorResponse getAuthorById(@PathVariable Long id){
         return authorService.getAuthorById(id);
     }
 
     @PostMapping()
-    public Author createAuthor(@RequestBody Author author){
-        return authorService.createAuthor(author);
+    public AuthorResponse createAuthor(@RequestBody AuthorRequest authorRequest){
+        return authorService.createAuthor(authorRequest);
     }
 
     @PutMapping("/{id}")
-    public Author updateAuthor(@PathVariable Long id, @RequestBody Author author){
-        return authorService.updateAuthor(id, author);
+    public AuthorResponse updateAuthor(@PathVariable Long id, @RequestBody AuthorRequest authorRequest){
+        return authorService.updateAuthor(id, authorRequest);
     }
 
     @PatchMapping("/{id}")
-    public Author patchAuthor(@PathVariable Long id, @RequestBody Author author){
-        return authorService.updateAuthor(id, author);
+    public AuthorResponse patchAuthor(@PathVariable Long id, @RequestBody AuthorRequest authorRequest){
+        return authorService.updateAuthor(id, authorRequest);
     }
 
     @DeleteMapping("/{id}")

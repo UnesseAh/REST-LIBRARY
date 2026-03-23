@@ -1,11 +1,11 @@
 package com.library.rest.controller;
 
-import com.library.rest.entities.Book;
+import com.library.rest.dto.book.BookRequest;
+import com.library.rest.dto.book.BookResponse;
 import com.library.rest.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/books")
@@ -17,28 +17,28 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getAllBooks(){
+    public List<BookResponse> getAllBooks(){
         return bookService.getAllBooks();
     }
 
     @GetMapping("/{id}")
-    public Optional<Book> getBookById(@PathVariable Long id){
+    public BookResponse getBookById(@PathVariable Long id){
         return bookService.getBookById(id);
     }
 
     @PostMapping
-    public Book createBook(@RequestBody Book book){
-        return bookService.createBook(book);
+    public BookResponse createBook(@RequestBody BookRequest bookRequest){
+        return bookService.createBook(bookRequest);
     }
 
     @PutMapping("/{id}")
-    public Book updateBook(@PathVariable Long id, @RequestBody Book book){
-        return bookService.updateBook(id, book);
+    public BookResponse updateBook(@PathVariable Long id, @RequestBody BookRequest bookRequest){
+        return bookService.updateBook(id, bookRequest);
     }
 
     @PatchMapping("/{id}")
-    public Book patchBook(@PathVariable Long id, @RequestBody Book book){
-        return bookService.updateBook(id, book);
+    public BookResponse patchBook(@PathVariable Long id, @RequestBody BookRequest bookRequest){
+        return bookService.updateBook(id, bookRequest);
     }
 
     @DeleteMapping("/{id}")

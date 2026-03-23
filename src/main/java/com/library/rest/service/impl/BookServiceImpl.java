@@ -1,61 +1,72 @@
 package com.library.rest.service.impl;
 
+import com.library.rest.dto.book.BookRequest;
+import com.library.rest.dto.book.BookResponse;
 import com.library.rest.entities.Author;
 import com.library.rest.entities.Book;
+import com.library.rest.repository.AuthorRepository;
 import com.library.rest.repository.BookRepository;
-import com.library.rest.service.AuthorService;
 import com.library.rest.service.BookService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
-    private final AuthorService authorService;
+    private final AuthorRepository authorRepository;
 
-    public BookServiceImpl(BookRepository bookRepository, AuthorService authorService) {
+    public BookServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
-        this.authorService = authorService;
+        this.authorRepository = authorRepository;
     }
 
     @Override
-    public List<Book>  getAllBooks() {
-        return bookRepository.findAll();
+    public List<BookResponse>  getAllBooks() {
+        return bookRepository.findAll().stream().map(this::mapToResponse).toList();
     }
 
     @Override
-    public Optional<Book> getBookById(Long id) {
-        return bookRepository.findById(id);
+    public BookResponse getBookById(Long id) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("No book found with id : " + id));
+        return mapToResponse(book);
     }
 
     @Override
-    public Book createBook(Book book) {
-        Long authorId  = book.getAuthor().getId();
-        Author author = authorService.getAuthorById(authorId).orElseThrow(() -> new RuntimeException("Cannot create book : Author not found with id : " + authorId));
+    public BookResponse createBook(BookRequest bookRequest) {
+        Book book = new Book();
+        book.setTitle(bookRequest.title());
+        book.setIsbn(bookRequest.isbn());
+        book.setPublishedYear(bookRequest.publishedYear());
+        book.setBookGenre(bookRequest.bookGenre());
+        book.setCoverImageUrl(bookRequest.coverImageUrl());
+
+        Long authorId  = bookRequest.authorId();
+        Author author = authorRepository.findById(authorId).orElseThrow(() -> new RuntimeException("No author found with id : " + authorId));
         book.setAuthor(author);
-        return bookRepository.save(book);
+        Book savedBook = bookRepository.save(book);
+        return mapToResponse(savedBook);
     }
 
     @Override
-    public Book updateBook(Long id, Book book) {
-        return bookRepository.findById(id)
+    public BookResponse updateBook(Long id, BookRequest bookRequest) {
+        Book book =  bookRepository.findById(id)
                 .map(existingBook -> {
-                    existingBook.setTitle(book.getTitle());
-                    existingBook.setIsbn(book.getIsbn());
-                    existingBook.setPublishedYear(book.getPublishedYear());
+                    existingBook.setTitle(bookRequest.title());
+                    existingBook.setIsbn(bookRequest.isbn());
+                    existingBook.setPublishedYear(bookRequest.publishedYear());
 
-                    if (book.getAuthor() != null && book.getAuthor().getId() != null){
-                        Long authorId = book.getAuthor().getId();
-                        Author author = authorService.getAuthorById(authorId)
+                    if (bookRequest.authorId() != null){
+                        Long authorId = bookRequest.authorId();
+                        Author author = authorRepository.findById(authorId)
                                 .orElseThrow(() -> new RuntimeException("Cannot update book : No author found with id : " + authorId));
                         existingBook.setAuthor(author);
                     }
                     return bookRepository.save(existingBook);
                 })
                 .orElseThrow(() -> new RuntimeException("Book not found with id : " + id));
+        return mapToResponse(book);
     }
 
     @Override
@@ -65,5 +76,18 @@ public class BookServiceImpl implements BookService {
         } else {
             throw new RuntimeException("Cannot delete : Book not found with id : " + id);
         }
+    }
+
+    private BookResponse mapToResponse(Book book){
+        return new BookResponse(
+                book.getId(),
+                book.getTitle(),
+                book.getIsbn(),
+                book.getPublishedYear(),
+                book.getBookGenre(),
+                book.getCoverImageUrl(),
+                book.getAuthor().getFullName(),
+                book.getAuthor().getId()
+        );
     }
 }

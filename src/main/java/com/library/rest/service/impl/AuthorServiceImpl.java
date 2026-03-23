@@ -1,5 +1,7 @@
 package com.library.rest.service.impl;
 
+import com.library.rest.dto.author.AuthorRequest;
+import com.library.rest.dto.author.AuthorResponse;
 import com.library.rest.entities.Author;
 import com.library.rest.entities.enums.LiteraryMovement;
 import com.library.rest.repository.AuthorRepository;
@@ -7,7 +9,6 @@ import com.library.rest.service.AuthorService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -19,30 +20,38 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<Author> getAllAuthors() {
-        return authorRepository.findAll();
+    public List<AuthorResponse> getAllAuthors() {
+        return authorRepository.findAll().stream().map(this::mapToResponse).toList();
     }
 
     @Override
-    public Optional<Author> getAuthorById(Long id) {
-        return authorRepository.findById(id);
+    public AuthorResponse getAuthorById(Long id) {
+        Author foundAuthor = authorRepository.findById(id).orElseThrow(() -> new RuntimeException("Author not found with id : " + id));
+        return mapToResponse(foundAuthor);
     }
 
     @Override
-    public Author createAuthor(Author author) {
-        return authorRepository.save(author);
+    public AuthorResponse createAuthor(AuthorRequest authorRequest) {
+        Author author = new Author();
+        author.setFullName(authorRequest.fullName());
+        author.setBirthDay(authorRequest.birthDay());
+        author.setLiteraryMovement(authorRequest.literaryMovement());
+
+        Author savedAuthor = authorRepository.save(author);
+        return mapToResponse(savedAuthor);
     }
 
     @Override
-    public Author updateAuthor(Long id, Author author) {
-        return authorRepository.findById(id)
+    public AuthorResponse updateAuthor(Long id, AuthorRequest authorRequest) {
+        Author author = authorRepository.findById(id)
                 .map(existingAuthor -> {
-                    existingAuthor.setFullName(author.getFullName());
-                    existingAuthor.setBirthDay(author.getBirthDay());
-                    existingAuthor.setLiteraryMovement(author.getLiteraryMovement());
+                    existingAuthor.setFullName(authorRequest.fullName());
+                    existingAuthor.setBirthDay(authorRequest.birthDay());
+                    existingAuthor.setLiteraryMovement(authorRequest.literaryMovement());
                     return authorRepository.save(existingAuthor);
                 })
                 .orElseThrow(() -> new RuntimeException("Author not found with id : " + id));
+        return mapToResponse(author);
     }
 
     @Override
@@ -55,7 +64,17 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<Author> findByLiteraryMovement(LiteraryMovement movement) {
-        return authorRepository.findByLiteraryMovement(movement);
+    public List<AuthorResponse> findByLiteraryMovement(LiteraryMovement movement) {
+        return authorRepository.findByLiteraryMovement(movement).stream().map((this::mapToResponse)).toList();
+    }
+
+    private AuthorResponse mapToResponse(Author author){
+        return new AuthorResponse(
+                author.getId(),
+                author.getFullName(),
+                author.getBirthDay(),
+                author.getLiteraryMovement(),
+                author.getCreatedAt()
+        );
     }
 }

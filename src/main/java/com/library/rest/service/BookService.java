@@ -1,14 +1,14 @@
 package com.library.rest.service;
 
-import com.library.rest.entities.Book;
+import com.library.rest.dto.book.BookRequest;
+import com.library.rest.dto.book.BookResponse;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface BookService {
-    List<Book> getAllBooks();
-    Optional<Book> getBookById(Long id);
-    Book createBook(Book book);
-    Book updateBook(Long id, Book book);
+    List<BookResponse> getAllBooks();
+    BookResponse getBookById(Long id);
+    BookResponse createBook(BookRequest bookRequest);
+    BookResponse updateBook(Long id, BookRequest bookRequest);
     void deleteBook(Long id);
 }
