@@ -10,5 +10,6 @@ public interface BookService {
     BookResponse getBookById(Long id);
     BookResponse createBook(BookRequest bookRequest);
     BookResponse updateBook(Long id, BookRequest bookRequest);
+    BookResponse patchBook(Long id, BookRequest bookRequest);
     void deleteBook(Long id);
 }

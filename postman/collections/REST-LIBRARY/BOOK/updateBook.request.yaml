@@ -1,14 +1,14 @@
 $kind: http-request
 name: updateBook
-url: "{{URL}}/books/1"
+url: "{{URL}}/books/2"
 method: PUT
 body:
   type: json
   content: "{\r
 
-    \  \"isbn\": \"isbn01\",\r
+    \  \"isbn\": \"isbn02\",\r
 
-    \  \"title\": \"book01\",\r
+    \  \"title\": \"book02\",\r
 
     \  \"publishedYear\": \"2000\",\r
 
@@ -16,11 +16,7 @@ body:
 
     \  \"coverImageUrl\": \"\",\r
 
-    \  \"author\": {\r
-
-    \    \"id\": 1\r
-
-    \  }\r
+    \  \"authorId\": 2\r
 
     }"
 order: 3530862112528109

@@ -38,7 +38,7 @@ public class BookController {
 
     @PatchMapping("/{id}")
     public BookResponse patchBook(@PathVariable Long id, @RequestBody BookRequest bookRequest){
-        return bookService.updateBook(id, bookRequest);
+        return bookService.patchBook(id, bookRequest);
     }
 
     @DeleteMapping("/{id}")

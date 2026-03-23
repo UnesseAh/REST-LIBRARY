@@ -6,7 +6,7 @@ body:
   type: json
   content: "{\r
 
-    \  \"fullName\": \"author-2\",\r
+    \  \"fullName\": \"author03\",\r
 
     \  \"birthDay\": \"1998-01-01\",\r
 

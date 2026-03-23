@@ -6,9 +6,9 @@ body:
   type: json
   content: "{\r
 
-    \  \"isbn\": \"isbn-02\",\r
+    \  \"isbn\": \"isbn6786\",\r
 
-    \  \"title\": \"title02\",\r
+    \  \"title\": \"title01\",\r
 
     \  \"publishedYear\": 1999,\r
 
@@ -16,11 +16,7 @@ body:
 
     \  \"coverImageUrl\": \"\",\r
 
-    \  \"author\": {\r
-
-    \    \"id\": 1\r
-
-    \  }\r
+    \  \"authorId\": 2\r
 
     }"
 order: 1019956522636298

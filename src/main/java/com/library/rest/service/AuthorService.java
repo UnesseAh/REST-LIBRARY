@@ -11,6 +11,7 @@ public interface AuthorService {
     AuthorResponse getAuthorById(Long id);
     AuthorResponse createAuthor(AuthorRequest authorRequest);
     AuthorResponse updateAuthor(Long id, AuthorRequest authorRequest);
+    AuthorResponse patchAuthor(Long id, AuthorRequest authorRequest);
     void deleteAuthor(Long id);
     List<AuthorResponse> findByLiteraryMovement(LiteraryMovement movement);
 }

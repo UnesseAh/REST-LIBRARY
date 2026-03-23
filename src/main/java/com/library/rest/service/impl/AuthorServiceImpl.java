@@ -55,6 +55,22 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    public AuthorResponse patchAuthor(Long id, AuthorRequest authorRequest) {
+        Author author = authorRepository.findById(id).orElseThrow(() -> new RuntimeException("Author not found with id : " + id));
+        if (authorRequest.fullName() != null){
+            author.setFullName(authorRequest.fullName());
+        }
+        if (authorRequest.birthDay() != null){
+            author.setBirthDay(authorRequest.birthDay());
+        }
+        if (authorRequest.literaryMovement() != null){
+            author.setLiteraryMovement(authorRequest.literaryMovement());
+        }
+        Author savedAuthor = authorRepository.save(author);
+        return mapToResponse(savedAuthor);
+    }
+
+    @Override
     public void deleteAuthor(Long id) {
         if (authorRepository.existsById(id)){
             authorRepository.deleteById(id);

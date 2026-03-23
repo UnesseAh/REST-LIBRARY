@@ -70,6 +70,39 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public BookResponse patchBook(Long id, BookRequest bookRequest) {
+        Book book =  bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found with id : " + id));
+
+        if (bookRequest.title() != null){
+            book.setTitle(bookRequest.title());
+        }
+
+        if (bookRequest.isbn() != null){
+            book.setIsbn(bookRequest.isbn());
+        }
+
+        if (bookRequest.publishedYear() != null){
+            book.setPublishedYear(bookRequest.publishedYear());
+        }
+
+        if (bookRequest.bookGenre() != null){
+            book.setBookGenre(bookRequest.bookGenre());
+        }
+
+        if (bookRequest.coverImageUrl() != null){
+            book.setCoverImageUrl(bookRequest.coverImageUrl());
+        }
+
+        if (bookRequest.authorId() != null){
+            Author author = authorRepository.findById(bookRequest.authorId())
+                    .orElseThrow(() -> new RuntimeException("Cannot update book: No author found with id : " + bookRequest.authorId()));
+            book.setAuthor(author);
+        }
+        Book savedBook = bookRepository.save(book);
+        return mapToResponse(savedBook);
+    }
+
+    @Override
     public void deleteBook(Long id) {
         if (bookRepository.existsById(id)){
             bookRepository.deleteById(id);

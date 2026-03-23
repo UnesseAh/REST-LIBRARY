@@ -38,7 +38,7 @@ public class AuthorController {
 
     @PatchMapping("/{id}")
     public AuthorResponse patchAuthor(@PathVariable Long id, @RequestBody AuthorRequest authorRequest){
-        return authorService.updateAuthor(id, authorRequest);
+        return authorService.patchAuthor(id, authorRequest);
     }
 
     @DeleteMapping("/{id}")
